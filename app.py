@@ -49,7 +49,7 @@ def validate():
         dob = request.form['dob']
         country = request.form['country']
         if validate_data({"first_name": firstname, "last_name": lastname, "dob": dob, "country": country}):
-            return render_template('valid_member.html', firstname = firstname, lastname= lastname, dob = dob, country = country)
+            return render_template('valid_member.html', firstname = firstname, lastname= lastname, dob = dob, country = country, not_valid = False)
         else:
             return render_template('valid_member.html', firstname = firstname, lastname= lastname, dob = dob, country = country, not_valid = True)
     return render_template('valid_member.html')

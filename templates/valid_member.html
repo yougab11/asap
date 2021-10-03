@@ -4,8 +4,9 @@
 <div>
     {% if not_valid %}
         <div>not a user</div>
-    {% else %}
+    {% elif not_valid == false %}
         <div>YAY a user</div>
+    {% else %}
     {% endif %}
 </div>
   <form method="post">
