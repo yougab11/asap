@@ -1,12 +1,13 @@
+from typing import Counter
 from flask import Flask
-from flask import jsonify
-from flask import request
+from flask import jsonify, request, render_template
+import re
 
 app = Flask(__name__)
 
 #save time not creating a database
-database = [{"user_id": '0',"first_name": "Jose", "last_name": "Vasconcelos", "dob": "01/01/1961", "country": "MX"}, 
-    {"user_id": '1', "first_name": "test", "last_name": "tester", "dob": "01/01/1991", "country": "US"}]
+database = [{"first_name": "Jose", "last_name": "Vasconcelos", "dob": "01/01/1961", "country": "MX"}, 
+    { "first_name": "test", "last_name": "tester", "dob": "01/01/1991", "country": "US"}]
 
 
 @app.route('/')
@@ -42,4 +43,29 @@ def members():
 # ● No need to spend too much time styling this. Plain HTML is fine. Minimal styling encouraged.
 @app.route('/member_id/validate', methods=['POST', 'GET'])
 def validate():
-    return 'Hello, World!'
+    if request.method == 'POST':
+        firstname = request.form['firstname']
+        lastname = request.form['lastname']
+        dob = request.form['dob']
+        country = request.form['country']
+        if validate_data({"first_name": firstname, "last_name": lastname, "dob": dob, "country": country}):
+            return render_template('valid_member.html', firstname = firstname, lastname= lastname, dob = dob, country = country)
+        else:
+            return render_template('valid_member.html', firstname = firstname, lastname= lastname, dob = dob, country = country, not_valid = True)
+    return render_template('valid_member.html')
+
+
+
+def validate_data(data):
+    #process data
+    #very dumb validation
+    valid = False
+    for user in database:
+        dobuser = re.sub("[^0-9]", "",user['dob'])
+        dobdata = re.sub("[^0-9]", "",data['dob'])
+        if user['first_name'] == data['first_name'] and user['last_name'] == data['last_name'] and dobuser == dobdata and user['country'] == data['country']:
+            valid = True
+    return valid
+
+
+    

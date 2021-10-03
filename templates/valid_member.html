@@ -1,0 +1,21 @@
+<div>
+    values submitted {{firstname}} , {{ lastname}} , {{ country }}, {{ dob }}
+</div>
+<div>
+    {% if not_valid %}
+        <div>not a user</div>
+    {% else %}
+        <div>YAY a user</div>
+    {% endif %}
+</div>
+  <form method="post">
+    <label for="firstname">First name</label>
+    <input name="firstname" id="firstname" required>
+    <label for="lastname">Last name</label>
+    <input type="lastname" name="lastname" id="lastname" required>
+    <label for="country">Country</label>
+    <input name="country" id="country" required>
+    <label for="dob">DOB</label>
+    <input type="dob" name="dob" id="dob" required>
+    <input type="submit" value="Validate">
+  </form>
