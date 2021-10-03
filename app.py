@@ -5,7 +5,7 @@ import re
 
 app = Flask(__name__)
 
-#save time not creating a database
+#save time not creating a database with sqllite or other.
 database = [{"first_name": "Jose", "last_name": "Vasconcelos", "dob": "01/01/1961", "country": "MX"}, 
     { "first_name": "test", "last_name": "tester", "dob": "01/01/1991", "country": "US"}]
 
